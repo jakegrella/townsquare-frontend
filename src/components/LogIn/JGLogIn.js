@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
 
@@ -36,8 +36,9 @@ const LogIn = () => {
 			})
 			.then((res) => {
 				console.log('login post res', res);
-				console.log('res.data.token', res.data.token);
 				localStorage.setItem('token', res.data.token);
+				localStorage.setItem('username', res.data.user.username);
+				localStorage.setItem('location', res.data.user.location_id);
 
 				// const userID = users.filter((user) => {
 				// 	return user.username === credentials.username;
@@ -46,7 +47,7 @@ const LogIn = () => {
 				// localStorage.setItem('userID', JSON.stringify(userID[0].id));
 				// localStorage.setItem('username', userID[0].username);
 
-				// push(`/dashboard/${userID[0].id}`);
+				push(`/dashboard/${res.data.user.username}`);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -87,6 +88,7 @@ const LogIn = () => {
 					value={credentials.password}
 					onChange={handleChange}
 				/>
+				<Link to='/signup'>sign up here</Link>
 				<button>login</button>
 			</form>
 			{/* <style jsx>{`

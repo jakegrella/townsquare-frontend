@@ -15,6 +15,7 @@ import PrivateRoute from './components/PrivateRoute.js';
 import IssuePage from './components/IssuePage.js';
 import IssueForm from './components/PostForm/IssueForm.js';
 import SignUp from './components/SignUp/SignUp';
+import Dashboard from './components/Dashboard/Dashboard';
 
 // styles
 import './App.scss';
@@ -33,6 +34,7 @@ function App() {
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={SignUp} />
+				<PrivateRoute path='/dashboard/:user' component={Dashboard} />
 				<PrivateRoute path='/userHome' component={NavBar} />
 				<PrivateRoute path='/issuesListPage' component={NavBar} />
 				<PrivateRoute path='/issues/:id' component={NavBar} />
