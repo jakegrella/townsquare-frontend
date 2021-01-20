@@ -17,7 +17,7 @@ import { issuesReducer } from './reducer/index';
 import App from './App';
 
 // styles
-import './index.scss';
+import './reset.css';
 
 const store = createStore(issuesReducer, applyMiddleware(thunk, logger));
 

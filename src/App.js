@@ -16,9 +16,7 @@ import IssuePage from './components/IssuePage.js';
 import IssueForm from './components/PostForm/IssueForm.js';
 import SignUp from './components/SignUp/SignUp';
 import Dashboard from './components/Dashboard/Dashboard';
-
-// styles
-import './App.scss';
+import Landing from './components/Landing/Landing';
 
 function App() {
 	// const id = localStorage.getItem('userId');
@@ -32,6 +30,7 @@ function App() {
 	return (
 		<div className='App'>
 			<Switch>
+				<Route exact path='/' component={Landing} />
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={SignUp} />
 				<PrivateRoute path='/dashboard/:user' component={Dashboard} />
@@ -49,6 +48,33 @@ function App() {
 					}}
 				/> */}
 			</Switch>
+			<style jsx>{`
+				body {
+					// background: red;
+				}
+
+				h1 {
+					font-family: 'Playfair Display', serif;
+					font-size: 4.8rem;
+				}
+
+				h2,
+				h3,
+				h4,
+				h5,
+				h6,
+				a,
+				p {
+					font-family: 'Roboto', sans-serif;
+				}
+				h2 {
+					font-size: 2.4rem;
+				}
+
+				a {
+					text-decoration: none;
+				}
+			`}</style>
 		</div>
 	);
 }
