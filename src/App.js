@@ -7,16 +7,12 @@ import { Route, Switch } from 'react-router-dom';
 
 // components
 import Login from './components/LogIn/JGLogIn';
-// import Login from './components/LogIn/LogIn.js';
-import UserHome from './components/UserHome.js';
-import IssuesListPage from './components/IssuesListPage.js';
-import NavBar from './components/Headers/Header.js';
 import PrivateRoute from './components/PrivateRoute.js';
-import IssuePage from './components/IssuePage.js';
-import IssueForm from './components/PostForm/IssueForm.js';
+// import IssueForm from './components/PostForm/IssueForm.js';
 import SignUp from './components/SignUp/SignUp';
 import Dashboard from './components/Dashboard/Dashboard';
 import Landing from './components/Landing/Landing';
+import CreatePost from './components/CreatePost/CreatePost';
 
 function App() {
 	// const id = localStorage.getItem('userId');
@@ -34,13 +30,8 @@ function App() {
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={SignUp} />
 				<PrivateRoute path='/dashboard/:user' component={Dashboard} />
-				<PrivateRoute path='/userHome' component={NavBar} />
-				<PrivateRoute path='/issuesListPage' component={NavBar} />
-				<PrivateRoute path='/issues/:id' component={NavBar} />
-				<PrivateRoute path='/issues/:id' component={IssuePage} />
-				<PrivateRoute path='/userHome/' component={UserHome} />
-				<PrivateRoute path='/issuesListPage' component={IssuesListPage} />
-				<PrivateRoute path='/submitIssue' component={IssueForm} />
+				<PrivateRoute path='/create-post' component={CreatePost} />
+				{/* <PrivateRoute path='/submitIssue' component={IssueForm} /> */}
 				{/* <PrivateRoute
 					path='/submitIssue'
 					render={(props) => {
@@ -48,7 +39,7 @@ function App() {
 					}}
 				/> */}
 			</Switch>
-			<style jsx>{`
+			<style jsx='true'>{`
 				body {
 					// background: red;
 				}
@@ -73,6 +64,7 @@ function App() {
 
 				a {
 					text-decoration: none;
+					color: #000;
 				}
 			`}</style>
 		</div>

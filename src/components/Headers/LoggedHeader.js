@@ -5,15 +5,38 @@ const LoggedHeader = () => {
 
 	const logOut = () => {
 		localStorage.removeItem('token');
-		localStorage.removeItem('user');
+		localStorage.removeItem('username');
+		localStorage.removeItem('location');
 		push('/login');
 	};
 
 	return (
 		<header>
-			<h1>COMAKE</h1>
+			<h1>TownSquare</h1>
 
-			<button onClick={logOut}>log out</button>
+			<button className='btn' onClick={logOut}>
+				log out
+			</button>
+			<style jsx='true'>{`
+				header {
+					display: flex;
+					flex-flow: row nowrap;
+					justify-content: space-between;
+					margin: 2rem;
+				}
+
+				.btn {
+					font-size: 1.4rem;
+					border: 2px solid #000;
+					border-radius: 25px;
+					padding: 1rem 2rem;
+					margin-top: 1rem;
+					margin-bottom: 1rem;
+					background: #fcefde;
+					color: #000;
+					// width: 20rem;
+				}
+			`}</style>
 		</header>
 	);
 };

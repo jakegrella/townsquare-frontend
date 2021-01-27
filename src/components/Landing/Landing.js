@@ -19,7 +19,7 @@ const Landing = () => {
 					</Link>
 				</div>
 			</div>
-			<style jsx>{`
+			<style jsx='true'>{`
 				.container {
 					height: 100vh;
 					display: flex;
@@ -27,6 +27,8 @@ const Landing = () => {
 					justify-content: space-around;
 					align-items: center;
 					background: #fcefde;
+					padding-top: min(5rem);
+					padding-bottom: min(5rem);
 				}
 
 				h2 {
@@ -52,10 +54,19 @@ const Landing = () => {
 					border-radius: 25px;
 					padding: 1rem 5rem;
 					margin-top: 1rem;
+				}
+				.btn:nth-child(1) {
+					background: #000;
+					color: #fcefde;
+				}
+				.btn:hover {
+					background: #444;
+					border: 2px solid #444;
+				}
+				.btn:nth-child(2) {
 					color: #000;
 				}
-				.btn:first-child {
-					background: #000;
+				.btn:nth-child(2):hover {
 					color: #fcefde;
 				}
 			`}</style>

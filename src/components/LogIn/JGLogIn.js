@@ -17,8 +17,6 @@ const initialCredentials = {
 const LogIn = () => {
 	const { push } = useHistory();
 	const [credentials, setCredentials] = useState(initialCredentials);
-	// const [users, setUsers] = useState(initialUsers);
-	// console.log('credentials', credentials);
 
 	const handleChange = (event) => {
 		setCredentials({
@@ -40,62 +38,84 @@ const LogIn = () => {
 				localStorage.setItem('username', res.data.user.username);
 				localStorage.setItem('location', res.data.user.location_id);
 
-				// const userID = users.filter((user) => {
-				// 	return user.username === credentials.username;
-				// });
-
-				// localStorage.setItem('userID', JSON.stringify(userID[0].id));
-				// localStorage.setItem('username', userID[0].username);
-
 				push(`/dashboard/${res.data.user.username}`);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-		// axiosWithAuth().get(`/api/`)
 	};
-
-	// const getUserInfo = () => {
-	// 	axiosWithAuth()
-	// 		.get('/users')
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 			setUsers(res.data);
-	// 			// })
-	// 		});
-	// };
-
-	// useEffect(() => {
-	// 	getUserInfo();
-	// }, []);
 
 	return (
 		<>
 			{/* <Header /> */}
-			<form onSubmit={handleSubmit}>
-				<h2>log in</h2>
-				<input
-					type='text'
-					name='username'
-					placeholder='test username'
-					value={credentials.username}
-					onChange={handleChange}
-				/>
-				<input
-					type='text'
-					name='password'
-					placeholder='test password'
-					value={credentials.password}
-					onChange={handleChange}
-				/>
-				<Link to='/signup'>sign up here</Link>
-				<button>login</button>
-			</form>
-			{/* <style jsx>{`
-				form {
-					border: 1px solid red;
+			<div className='container'>
+				<Link to='/'>
+					<h1>TownSquare</h1>
+				</Link>
+				<form onSubmit={handleSubmit}>
+					<input
+						type='text'
+						name='username'
+						placeholder='Username'
+						value={credentials.username}
+						onChange={handleChange}
+					/>
+					<input
+						type='password'
+						name='password'
+						placeholder='Password'
+						value={credentials.password}
+						onChange={handleChange}
+					/>
+					<button className='btn'>Log In</button>
+					<p>
+						Don't have an account? <Link to='/signup'>Sign Up</Link>
+					</p>
+				</form>
+			</div>
+			<style jsx='true'>{`
+				.container {
+					height: 100vh;
+					display: flex;
+					flex-flow: column nowrap;
+					justify-content: space-around;
+					align-items: center;
+					background: #fcefde;
+					padding-top: min(5rem);
+					padding-bottom: min(5rem);
 				}
-			`}</style> */}
+
+				form {
+					display: flex;
+					flex-flow: column nowrap;
+					align-items: center;
+				}
+
+				input {
+					margin-bottom: 0.5rem;
+					width: 100%;
+				}
+
+				.btn {
+					font-size: 1.8rem;
+					border: 2px solid #000;
+					border-radius: 25px;
+					padding: 1rem 5rem;
+					margin-top: 1rem;
+					margin-bottom: 1rem;
+					background: #000;
+					color: #fcefde;
+					width: 20rem;
+				}
+				.btn:hover {
+					background: #444;
+					border: 2px solid #444;
+				}
+
+				p {
+					font-size: 1.4rem;
+				}
+			`}</style>
 		</>
 	);
 };
