@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
 
-//style
-// import StyledSignUp from './StyledSignUp';
-
 // 🎒 Initial Values
 const initialFormValues = {
 	username: '',
@@ -59,7 +56,7 @@ const SignUp = () => {
 					onChange={handleChange}
 				/>
 				<input
-					type='text'
+					type='password'
 					name='password'
 					placeholder='Password'
 					value={formValues.password}

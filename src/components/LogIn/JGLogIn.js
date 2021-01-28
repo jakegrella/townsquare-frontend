@@ -7,7 +7,6 @@ import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
 // import Header from './Header';
 
 const initialCredentials = {
-	id: '',
 	username: '',
 	password: '',
 };
