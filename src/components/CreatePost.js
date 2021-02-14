@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
-import LoggedHeader from '../Headers/LoggedHeader';
+import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
+import LoggedHeader from './Headers/LoggedHeader';
 
 const initNewPost = {
 	description: '',

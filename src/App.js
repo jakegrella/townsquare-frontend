@@ -1,18 +1,17 @@
 // react
-// import React, { useState } from 'react';
 import React from 'react';
 
 // router
 import { Route, Switch } from 'react-router-dom';
 
 // components
-import Login from './components/LogIn/JGLogIn';
+import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute.js';
 // import IssueForm from './components/PostForm/IssueForm.js';
-import SignUp from './components/SignUp/SignUp';
-import Dashboard from './components/Dashboard/Dashboard';
-import Landing from './components/Landing/Landing';
-import CreatePost from './components/CreatePost/CreatePost';
+import SignUp from './components/SignUp';
+import Dashboard from './components/Dashboard';
+import Landing from './components/Landing';
+import CreatePost from './components/CreatePost';
 
 function App() {
 	// const id = localStorage.getItem('userId');
@@ -41,11 +40,11 @@ function App() {
 			</Switch>
 			<style jsx='true'>{`
 				body {
-					// background: red;
+					background: #fff;
 				}
 
 				h1 {
-					font-family: 'Playfair Display', serif;
+					font-family: 'M PLUS 1p', sans-serif;
 					font-size: 4.8rem;
 				}
 
@@ -56,7 +55,7 @@ function App() {
 				h6,
 				a,
 				p {
-					font-family: 'Roboto', sans-serif;
+					font-family: 'Poppins', sans-serif;
 				}
 				h2 {
 					font-size: 2.4rem;

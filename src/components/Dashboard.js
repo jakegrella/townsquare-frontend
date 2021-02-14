@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
-import LoggedHeader from '../Headers/LoggedHeader';
+import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
+import LoggedHeader from './Headers/LoggedHeader';
 
 import { FaGlobe, FaBuilding, FaUser } from 'react-icons/fa';
 
-import PostCard from '../PostCard/PostCard';
+import PostCard from './PostCard';
 
 export default function Dashboard() {
 	const [posts, setPosts] = useState();

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
+import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
 
 // import Header from './Header';
 
@@ -79,7 +79,6 @@ const LogIn = () => {
 					flex-flow: column nowrap;
 					justify-content: space-around;
 					align-items: center;
-					background: #fcefde;
 					padding-top: min(5rem);
 					padding-bottom: min(5rem);
 				}

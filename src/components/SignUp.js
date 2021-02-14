@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axiosWithAuth from '../../axiosWithAuth/axiosWithAuth';
+import { Link, useHistory } from 'react-router-dom';
+import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
 
 // 🎒 Initial Values
 const initialFormValues = {
@@ -10,6 +10,7 @@ const initialFormValues = {
 };
 
 const SignUp = () => {
+	const { push } = useHistory();
 	const [formValues, setFormValues] = useState(initialFormValues);
 
 	const handleChange = (event) => {
@@ -19,7 +20,7 @@ const SignUp = () => {
 		});
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const newUser = {
 			username: formValues.username,
@@ -27,14 +28,28 @@ const SignUp = () => {
 			zipCode: formValues.zipCode,
 		};
 
-		axiosWithAuth()
+		await axiosWithAuth()
 			.post('/auth/register', newUser)
 			.then((res) => {
 				console.log(res);
-				alert(
-					`Account successfully created: username: ${formValues.username}, password: ${formValues.password}`
-				);
-				setFormValues(initialFormValues);
+				console.log('account created', newUser);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+
+		axiosWithAuth()
+			.post(`/auth/login`, {
+				username: formValues.username,
+				password: formValues.password,
+			})
+			.then((res) => {
+				console.log('login post res', res);
+				localStorage.setItem('token', res.data.token);
+				localStorage.setItem('username', res.data.user.username);
+				localStorage.setItem('location', res.data.user.location_id);
+
+				push(`/dashboard/${res.data.user.username}`);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -81,7 +96,6 @@ const SignUp = () => {
 					flex-flow: column nowrap;
 					justify-content: space-around;
 					align-items: center;
-					background: #fcefde;
 					padding-top: min(5rem);
 					padding-bottom: min(5rem);
 				}

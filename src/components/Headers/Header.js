@@ -1,63 +1,47 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/ts-logo.png';
 
-const StyledDiv = styled.div`
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-evenly;
-	align-items: center;
-	background: #e29027;
-	box-shadow: 2px 3px burlywood;
-	border-bottom: 1px solid sienna;
-	width: 100%;
-	position: fixed;
-	top: 0px;
-	opacity: 0.9;
-	@media (max-width: 500px) {
-		padding: 1rem 0;
-		flex-direction: column;
-	}
-	a {
-		margin: 1rem 2rem;
-		text-decoration: none;
-		color: #333333;
-		@media (max-width: 500px) {
-			margin: 0.5rem;
-		}
-		&:hover {
-			color: #9a9a9a;
-		}
-	}
-	.link {
-		opacity: 1;
-	}
-	.img {
-		opacity: 1;
-	}
-`;
-
-export default function NavBar(props) {
-	const { push } = useHistory();
-
-	const logout = (props) => {
-		localStorage.removeItem('token');
-		push('/');
-	};
-
+const Header = () => {
 	return (
-		<StyledDiv>
-			<NavLink className='link' to='/userHome'>
-				Home
-			</NavLink>
+		<div>
+			<header>
+				<Link to='/'>
+					<img src={logo} alt='townsquare' />
+				</Link>
+				<nav>
+					<Link to='/login' className='login'>
+						Log In
+					</Link>
+					<Link to='/signup' className='signup'>
+						Get Started
+					</Link>
+				</nav>
+			</header>
+			<style jsx='true'>{`
+				header {
+					width: 100vw;
+					height: 10rem;
+					display: flex;
+					flex-flow: row nowrap;
+					justify-content: space-between;
+					align-items: center;
+					padding: 0 5rem;
+				}
 
-			<NavLink className='link' to='/issuesListPage'>
-				All Local Issues Here{' '}
-			</NavLink>
-			<NavLink className='link' to='' onClick={logout}>
-				Logout
-			</NavLink>
-		</StyledDiv>
+				a {
+					font-size: 1.6rem;
+					margin-left: 2rem;
+				}
+
+				.signup {
+					background: #007d68;
+					color: #fff;
+					padding: 1.2rem 2rem;
+					border-radius: 1000px;
+				}
+			`}</style>
+		</div>
 	);
-}
+};
+
+export default Header;
