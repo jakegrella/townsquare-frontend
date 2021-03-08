@@ -1,19 +1,16 @@
-// import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
-import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
-
-// import Header from './Header';
+// import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
+// redux
+import { connect } from 'react-redux'
+import { loginUser } from '../store/actions'
 
 const initialCredentials = {
 	username: '',
 	password: '',
 };
 
-// const initialUsers = [];
-
-const LogIn = () => {
+const LogIn = (props) => {
 	const { push } = useHistory();
 	const [credentials, setCredentials] = useState(initialCredentials);
 
@@ -24,24 +21,30 @@ const LogIn = () => {
 		});
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		axiosWithAuth()
-			.post(`/auth/login`, {
-				username: credentials.username,
-				password: credentials.password,
-			})
-			.then((res) => {
-				console.log('login post res', res);
-				localStorage.setItem('token', res.data.token);
-				localStorage.setItem('username', res.data.user.username);
-				localStorage.setItem('location', res.data.user.location_id);
+		const user = {
+			username: credentials.username,
+			password: credentials.password
+		}
+		await props.loginUser(user)
+		push(`/dashboard/${user.username}`)
+	// 	axiosWithAuth()
+	// 		.post(`/auth/login`, {
+	// 			username: credentials.username,
+	// 			password: credentials.password,
+	// 		})
+	// 		.then((res) => {
+	// 			console.log('login post res', res);
+	// 			localStorage.setItem('token', res.data.token);
+	// 			localStorage.setItem('username', res.data.user.username);
+	// 			localStorage.setItem('location', res.data.user.location_id);
 
-				push(`/dashboard/${res.data.user.username}`);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	// 			push(`/dashboard/${res.data.user.username}`);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 		});
 	};
 
 	return (
@@ -118,4 +121,10 @@ const LogIn = () => {
 	);
 };
 
-export default LogIn;
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(mapStateToProps, { loginUser })(LogIn);
