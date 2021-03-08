@@ -5,11 +5,6 @@ import LoggedHeader from './Headers/LoggedHeader';
 import { FaGlobe, FaBuilding, FaUser } from 'react-icons/fa';
 import PostCard from './PostCard';
 
-// redux
-import { connect } from 'react-redux';
-import { } from '../store/actions/user';
-
-
 const Dashboard = (props) => {
 	const [posts, setPosts] = useState();
 
@@ -52,15 +47,18 @@ const Dashboard = (props) => {
 	const personal = () => {
 		console.log('personal');
 		setIsActive('personal');
-		axiosWithAuth()
-			.get(`/api/posts/u/${localStorage.getItem('username')}`)
-			.then((res) => {
-				console.log(res);
-				setPosts(res.data);
-			})
-			.catch((err) => {
-				console.log('500 error', err);
-			});
+		// axiosWithAuth()
+		// 	.get(`/api/posts/u/${localStorage.getItem('username')}`)
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 		setPosts(res.data);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log('500 error', err);
+		// 	});
+
+		// console.log('idk', ActionCreators.fetchUser(props.user))
+		console.log(props.user)
 	};
 
 	return (
@@ -175,10 +173,4 @@ const Dashboard = (props) => {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		user: state.user
-	};
-};
-
-export default connect(mapStateToProps, {  })(Dashboard);
+export default Dashboard;
