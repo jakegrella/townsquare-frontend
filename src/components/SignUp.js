@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
+import { connect } from 'react-redux'
+import { registerUser, loginUser } from '../store/actions'
 
 // 🎒 Initial Values
 const initialFormValues = {
@@ -9,7 +10,7 @@ const initialFormValues = {
 	zipCode: '',
 };
 
-const SignUp = () => {
+const SignUp = (props) => {
 	const { push } = useHistory();
 	const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -28,32 +29,36 @@ const SignUp = () => {
 			zipCode: formValues.zipCode,
 		};
 
-		await axiosWithAuth()
-			.post('/auth/register', newUser)
-			.then((res) => {
-				console.log(res);
-				console.log('account created', newUser);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		await props.registerUser(newUser);
+		console.log('submit user', newUser)
 
-		axiosWithAuth()
-			.post(`/auth/login`, {
-				username: formValues.username,
-				password: formValues.password,
-			})
-			.then((res) => {
-				console.log('login post res', res);
-				localStorage.setItem('token', res.data.token);
-				localStorage.setItem('username', res.data.user.username);
-				localStorage.setItem('location', res.data.user.location_id);
 
-				push(`/dashboard/${res.data.user.username}`);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		// await axiosWithAuth()
+		// 	.post('/auth/register', newUser)
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 		console.log('account created', newUser);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
+
+		// axiosWithAuth()
+		// 	.post(`/auth/login`, {
+		// 		username: formValues.username,
+		// 		password: formValues.password,
+		// 	})
+		// 	.then((res) => {
+		// 		console.log('login post res', res);
+		// 		localStorage.setItem('token', res.data.token);
+		// 		localStorage.setItem('username', res.data.user.username);
+		// 		localStorage.setItem('location', res.data.user.location_id);
+
+		// 		push(`/dashboard/${res.data.user.username}`);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
 	};
 
 	return (
@@ -135,4 +140,10 @@ const SignUp = () => {
 	);
 };
 
-export default SignUp;
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	}
+}
+
+export default connect(mapStateToProps, { registerUser, loginUser })(SignUp);
