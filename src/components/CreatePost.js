@@ -19,11 +19,15 @@ const CreatePost = () => {
 		e.preventDefault();
 		console.log('clicked submit btn');
 		axiosWithAuth()
-			.post(`/api/p/create`)
+			.post(`/api/posts/p/create`)
 			.then((res) => {
 				console.log(res);
 			})
-			.catch((err) => console.log(err.message));
+			.catch((err) => {
+				console.log('error');
+				console.log(err.message);
+				console.log(err);
+			});
 	};
 
 	return (

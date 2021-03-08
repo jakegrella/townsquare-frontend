@@ -2,19 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
 import LoggedHeader from './Headers/LoggedHeader';
-
 import { FaGlobe, FaBuilding, FaUser } from 'react-icons/fa';
-
 import PostCard from './PostCard';
 
-export default function Dashboard() {
+// redux
+import { connect } from 'react-redux';
+import { } from '../store/actions/user';
+
+
+const Dashboard = (props) => {
 	const [posts, setPosts] = useState();
 
 	const [isActive, setIsActive] = useState({ button: 'global' });
 
 	useEffect(() => {
+		// props.fetchUser();
 		global();
-	}, []);
+	}, [props, props.user]);
 
 	const global = () => {
 		console.log('global');
@@ -98,8 +102,8 @@ export default function Dashboard() {
 						return (
 							<PostCard
 								key={post.post_id}
-								name={post.user_id}
-								location={post.location_id}
+								name={post.username}
+								location={post.zipCode}
 								description={post.description}
 							/>
 						);
@@ -114,7 +118,7 @@ export default function Dashboard() {
 				}
 				nav button {
 					background: #fff;
-					padding: 1.5rem 1.5rem 1rem;
+					padding: 1rem 1.5rem 0.5rem;
 					font-size: 2rem;
 					// border: 2px solid #000;
 				}
@@ -125,7 +129,7 @@ export default function Dashboard() {
 					background: #fcefde;
 				}
 				.global-btn {
-					border-radius: 15px 0 0 15px;
+					border-radius: 30px 0 0 30px;
 					border-left: 2px solid #000;
 					border-top: 2px solid #000;
 					border-bottom: 2px solid #000;
@@ -138,7 +142,7 @@ export default function Dashboard() {
 					border-right: 1px solid #000;
 				}
 				.personal-btn {
-					border-radius: 0 15px 15px 0;
+					border-radius: 0 30px 30px 0;
 					border-left: 1px solid #000;
 					border-top: 2px solid #000;
 					border-bottom: 2px solid #000;
@@ -170,3 +174,11 @@ export default function Dashboard() {
 		</div>
 	);
 }
+
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	};
+};
+
+export default connect(mapStateToProps, {  })(Dashboard);

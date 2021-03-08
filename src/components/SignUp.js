@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
+//redux
+import { connect } from 'react-redux';
+import { ActionCreators } from '../store/actions/user';
 
 // 🎒 Initial Values
 const initialFormValues = {
@@ -8,6 +11,8 @@ const initialFormValues = {
 	password: '',
 	zipCode: '',
 };
+
+const { addUser, fetchUser } = ActionCreators
 
 const SignUp = () => {
 	const { push } = useHistory();
@@ -135,4 +140,10 @@ const SignUp = () => {
 	);
 };
 
-export default SignUp;
+const mapStateToProps = (state) => {
+	return {
+		user: state.user 
+	}
+}
+
+export default connect(mapStateToProps, { addUser, fetchUser })(SignUp);

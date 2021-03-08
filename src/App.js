@@ -1,8 +1,7 @@
-// react
+// dependencies
 import React from 'react';
-
-// router
 import { Route, Switch } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast'
 
 // components
 import Login from './components/Login';
@@ -30,31 +29,17 @@ function App() {
 				<Route exact path='/signup' component={SignUp} />
 				<PrivateRoute path='/dashboard/:user' component={Dashboard} />
 				<PrivateRoute path='/create-post' component={CreatePost} />
-				{/* <PrivateRoute path='/submitIssue' component={IssueForm} /> */}
-				{/* <PrivateRoute
-					path='/submitIssue'
-					render={(props) => {
-						return <IssueForm onSubmit={onSubmitIssue} />;
-					}}
-				/> */}
 			</Switch>
+			<Toaster />
 			<style jsx='true'>{`
 				body {
 					background: #fff;
 				}
-
 				h1 {
 					font-family: 'M PLUS 1p', sans-serif;
 					font-size: 4.8rem;
 				}
-
-				h2,
-				h3,
-				h4,
-				h5,
-				h6,
-				a,
-				p {
+				h2, h3, h4, h5, h6, a, p {
 					font-family: 'Poppins', sans-serif;
 				}
 				h2 {

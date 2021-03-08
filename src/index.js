@@ -6,12 +6,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // redux
-// import {createStore, applyMiddleware, compose} from 'redux';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import { issuesReducer } from './reducer/index';
+import configureStore from './store/store';
+
+import * as serviceWorker from './serviceWorker';
 
 // components
 import App from './App';
@@ -19,7 +17,8 @@ import App from './App';
 // styles
 import './reset.css';
 
-const store = createStore(issuesReducer, applyMiddleware(thunk, logger));
+const store = configureStore();
+
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -29,3 +28,5 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 );
+
+serviceWorker.unregister();
