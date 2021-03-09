@@ -6,28 +6,19 @@ import { Toaster } from 'react-hot-toast'
 // components
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute.js';
-// import IssueForm from './components/PostForm/IssueForm.js';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
 import Landing from './components/Landing';
 import CreatePost from './components/CreatePost';
 
 function App() {
-	// const id = localStorage.getItem('userId');
-
-	// const [newIssue, setNewIssue] = useState({});
-
-	// const onSubmitIssue = (formValues) => {
-	// 	setNewIssue(formValues);
-	// };
-
 	return (
 		<div className='App'>
 			<Switch>
 				<Route exact path='/' component={Landing} />
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={SignUp} />
-				<PrivateRoute path='/dashboard/:user' component={Dashboard} />
+				<PrivateRoute path='/:user' component={Dashboard} />
 				<PrivateRoute path='/create-post' component={CreatePost} />
 			</Switch>
 			<Toaster />

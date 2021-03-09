@@ -1,64 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axiosWithAuth from '../axiosWithAuth/axiosWithAuth';
+// redux
+import { connect } from 'react-redux'
+import { fetchAllPosts, fetchLocalPosts, fetchUserPosts } from '../store/actions'
+
 import LoggedHeader from './Headers/LoggedHeader';
 import { FaGlobe, FaBuilding, FaUser } from 'react-icons/fa';
 import PostCard from './PostCard';
 
 const Dashboard = (props) => {
+	console.log('dashboard props', props)
 	const [posts, setPosts] = useState();
 
 	const [isActive, setIsActive] = useState({ button: 'global' });
 
 	useEffect(() => {
-		// props.fetchUser();
 		global();
 	}, [props, props.user]);
 
 	const global = () => {
-		console.log('global');
 		setIsActive('global');
-		axiosWithAuth()
-			.get(`/api/posts`)
-			.then((res) => {
-				console.log(res);
-				setPosts(res.data);
-			})
-			.catch((err) => {
-				console.log('500 error', err);
-			});
+		setPosts(fetchAllPosts());
 	};
 
 	const local = () => {
-		console.log('local');
 		setIsActive('local');
-		axiosWithAuth()
-			// I do not think this is working correctly right now
-			.get(`/api/posts/l/${localStorage.getItem('location')}`)
-			.then((res) => {
-				console.log(res);
-				setPosts(res.data);
-			})
-			.catch((err) => {
-				console.log('500 error', err);
-			});
+		setPosts(fetchLocalPosts());
 	};
 
 	const personal = () => {
-		console.log('personal');
 		setIsActive('personal');
-		// axiosWithAuth()
-		// 	.get(`/api/posts/u/${localStorage.getItem('username')}`)
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 		setPosts(res.data);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log('500 error', err);
-		// 	});
-
-		// console.log('idk', ActionCreators.fetchUser(props.user))
-		console.log(props.user)
+		setPosts(fetchUserPosts(props.user.username));
 	};
 
 	return (
@@ -173,4 +145,13 @@ const Dashboard = (props) => {
 	);
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+	return {
+		user: state.user,
+		userPosts: state.userPosts,
+		localPosts: state.localPosts,
+		globalPosts: state.globalPosts,
+	}
+}
+
+export default connect(mapStateToProps, { fetchAllPosts, fetchLocalPosts, fetchUserPosts })(Dashboard);

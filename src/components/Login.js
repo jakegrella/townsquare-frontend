@@ -21,31 +21,22 @@ const LogIn = (props) => {
 		});
 	};
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		const user = {
 			username: credentials.username,
-			password: credentials.password
-		}
-		await props.loginUser(user)
-		push(`/dashboard/${user.username}`)
-	// 	axiosWithAuth()
-	// 		.post(`/auth/login`, {
-	// 			username: credentials.username,
-	// 			password: credentials.password,
-	// 		})
-	// 		.then((res) => {
-	// 			console.log('login post res', res);
-	// 			localStorage.setItem('token', res.data.token);
-	// 			localStorage.setItem('username', res.data.user.username);
-	// 			localStorage.setItem('location', res.data.user.location_id);
-
-	// 			push(`/dashboard/${res.data.user.username}`);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
+			password: credentials.password,
+		};
+		props.loginUser(user).then(() => {
+			push(`/${props.user.username}`)
+		})
+		// if(loggedUser !== undefined) {
+		// } else {
+		// 	console.log('undefined loggedUser')
+		// }
 	};
+
+	
 
 	return (
 		<>

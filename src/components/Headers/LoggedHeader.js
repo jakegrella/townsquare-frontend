@@ -4,10 +4,13 @@ const LoggedHeader = () => {
 	const { push } = useHistory();
 
 	const logOut = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem('username');
-		localStorage.removeItem('location');
-		push('/login');
+		try {
+			localStorage.removeItem('token');
+			console.log('logged out')
+			push('/login');
+		} catch {
+			console.log('error logging out')
+		}
 	};
 
 	return (
