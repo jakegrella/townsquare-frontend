@@ -67,11 +67,10 @@ export const fetchLocalPosts = () => (dispatch) => {
 };
 
 // get all posts (global)
-export const fetchAllPosts = () => (dispatch) => {
+export const fetchAllPosts = (dispatch) => {
   axiosWithAuth()
     .get(`${BACKEND_URL}/api/posts`)
     .then((res) => {
-      console.log(res);
       dispatch({ type: 'SET_GLOBAL_POSTS', payload: res.data });
     })
     .catch((err) => {
